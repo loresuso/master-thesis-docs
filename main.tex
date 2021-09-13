@@ -1,0 +1,108 @@
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage[font=footnotesize]{caption}
+\usepackage{subcaption}
+% remember to put binding offset later bindingoffset=9mm
+\usepackage[a4paper,width=150mm,top=50mm,bottom=50mm]{geometry}
+\usepackage{dirtytalk}
+\usepackage{svg}
+
+\usepackage{float}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+
+
+\lstdefinestyle{c}{
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    frame=tb,
+    basicstyle=\small,
+    showspaces=false,  
+    language=c, 
+    captionpos=b,
+    aboveskip=2em,
+    lineskip=.2cm
+}
+
+% texttt trick 
+\catcode`\_=12 %
+\newcommand{\tttjust}[1]{%
+  \begingroup
+  \ttfamily
+  \begingroup\lccode`~=`/\lowercase{\endgroup\def~}{/\discretionary{}{}{}}%
+  \begingroup\lccode`~=`[\lowercase{\endgroup\def~}{[\discretionary{}{}{}}%
+  \begingroup\lccode`~=`.\lowercase{\endgroup\def~}{.\discretionary{}{}{}}%
+  \begingroup\lccode`~=`_\lowercase{\endgroup\def~}{_\discretionary{}{}{}}%
+  \catcode`/=\active\catcode`[=\active\catcode`.=\active\catcode`\_=\active
+  \scantokens{#1\noexpand}%
+  \endgroup
+}
+\catcode`\_=8 %
+
+\usepackage[style=numeric]{biblatex}
+\addbibresource{refs.bib}
+
+
+\title{Thesis Title}
+\author{Lorenzo Susini}
+\date{\today}
+
+\begin{document}
+
+\input{titlepage}
+
+\doublespacing
+
+\input{abstract}
+
+\tableofcontents
+
+\chapter{Introduction}
+\label{chap:intro}
+\input{chapters/introduction}
+
+\chapter{Background}
+\label{chap:background}
+\input{chapters/background}
+
+\chapter{Design and implementation}
+\label{chap:design-impl}
+\input{chapters/design-implementation}
+
+\chapter{Evaluation}
+\label{chap:testing}
+\input{chapters/testing}
+
+\chapter{Conclusions}
+\label{chap:conclusions}
+\input{chapters/conclusions}
+
+\listoffigures
+
+%\listoftables
+
+\lstlistoflistings
+
+\printbibliography
+
+\newpage
+\input{acknowledgments}
+
+\end{document}
